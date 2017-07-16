@@ -13,6 +13,8 @@ class UsersController extends Controller
     }
 
     public function store(Request $request){
-        //$user = new User();
+        $user = new User( $request->all());
+        $user->save();
+        dd('Usuario creado con éxito.');
     }
 }
