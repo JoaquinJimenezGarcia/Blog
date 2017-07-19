@@ -24,6 +24,17 @@ Route::group(['prefix' => 'admin'], function() {
 
 });
 
-Auth::routes();
+Route::get('admin/auth/login', [
+    'uses' => 'Auth\LoginController@showLoginForm',
+    'as' => 'admin.auth.login'
+]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::post('admin/auth/login', [
+    'uses' => 'Auth\LoginController@login',
+    'as' => 'admin.auth.login'
+]);
+
+Route::get('admin/auth/logout', [
+    'uses' => 'Auth\LoginController@logout',
+    'as' => 'admin.auth.logout'
+]);
