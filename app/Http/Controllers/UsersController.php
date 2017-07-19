@@ -27,4 +27,14 @@ class UsersController extends Controller{
 
         return redirect()->route('users.index');
     }
+
+    public function destroy($id){
+        $user = User::find($id);
+
+        $user->delete();
+
+        flash("Usuario  " . $user->name . " ha sido borrado con éxito")->warning();
+
+        return redirect()->route('users.index');
+    }
 }
