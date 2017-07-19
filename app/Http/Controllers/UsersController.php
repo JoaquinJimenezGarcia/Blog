@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Laracasts\Flash\Flash;
 
 class UsersController extends Controller{
     public function index(){
@@ -20,6 +21,9 @@ class UsersController extends Controller{
         $user = new User( $request->all());
         $user->password = bcrypt($request->password);
         $user->save();
-        dd('Usuario creado con éxito.');
+
+        flash("Se ha registrado " . $user->name . " de forma exitosa.")->success();
+
+        return redirect()->route('users.index');
     }
 }
