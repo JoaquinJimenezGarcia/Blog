@@ -37,4 +37,23 @@ class UsersController extends Controller{
 
         return redirect()->route('users.index');
     }
+
+    public function edit($id){
+        $user = User::find($id);
+
+        return view('admin.users.edit')->with('user', $user);
+    }
+
+    public function update(Request $request, $id){
+        $user = User::find($id);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->type = $request->type;
+
+        $user->save();
+
+        flash("Se ha editado el usuario " . $user->name . " con éxito")->warning();
+        return redirect()->route('users.index');
+    }
 }
